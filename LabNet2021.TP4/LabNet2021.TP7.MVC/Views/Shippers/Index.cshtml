@@ -1,0 +1,37 @@
+﻿@model List<LabNet2021.TP7.MVC.Models.ShippersView>
+
+@{
+    ViewBag.Title = "Transportes";
+}
+
+<h1>Transportes</h1>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                @*<th scope="col">ID</th>*@
+                <th scope="col">Empresa</th>
+                <th scope="col">Teléfono</th>
+            </tr>
+        </thead>
+        @foreach (var shipper in Model)
+        {
+            <tbody>
+                <tr>
+                    @*<th>@shipper.ID</th>*@
+                    <td>@shipper.Company</td>
+                    <td>@shipper.Phone</td>
+                    <td>
+                        @Html.ActionLink("Modificar", "Update", new { id = shipper.ID, shipper.Company, shipper.Phone }, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Borrar", "Delete", new { id = shipper.ID }, new { @class = "btn btn-danger btn-large" })
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+
+<div>
+    @Html.ActionLink("Insertar transporte", "Insert", "Shippers", new { @class = "btn btn-success btn-large" })
+</div>

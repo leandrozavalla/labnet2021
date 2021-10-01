@@ -1,0 +1,43 @@
+﻿@model LabNet2021.TP7.MVC.Models.ShippersView
+
+@{
+    ViewBag.Title = "Transportes";
+}
+
+@{ if (ViewBag.ID == null)
+    {
+        <h1>Insertar transporte</h1>
+        <br />
+
+        using (Html.BeginForm("Insert", "Shippers", FormMethod.Post))
+        {
+            <label>Empresa: </label> @Html.TextBoxFor(s => s.Company)
+            @Html.ValidationMessageFor(s => s.Company, "", new { @class = "text-danger" })
+            <br />
+            <br />
+            <label>Teléfono: </label> @Html.TextBoxFor(s => s.Phone)
+            @Html.ValidationMessageFor(s => s.Phone, "", new { @class = "text-danger" })
+            <br />
+            <br />
+            <input type="submit" class="btn btn-success" value="Guardar" />
+        }
+    }
+    else
+    {
+        <h1>Modificar transporte</h1>
+        <br />
+
+        using (Html.BeginForm("Update", "Shippers", FormMethod.Post))
+        {
+            <label>Empresa: </label> @Html.TextBoxFor(s => s.Company)
+            @Html.ValidationMessageFor(s => s.Company, "", new { @class = "text-danger" })
+            <br />
+            <br />
+            <label>Teléfono: </label> @Html.TextBoxFor(s => s.Phone)
+            @Html.ValidationMessageFor(s => s.Phone, "", new { @class = "text-danger" })
+            <br />
+            <br />
+            <input type="submit" class="btn btn-success" value="Guardar" />
+        }
+    }
+}
