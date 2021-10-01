@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LabNet2021.TP7.MVC.Models
 {
     public class ShippersView
     {
+        [Key]
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Campo requerido.")]

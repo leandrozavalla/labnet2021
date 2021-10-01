@@ -4,7 +4,6 @@ using LabNet2021.TP7.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace LabNet2021.TP7.MVC.Controllers
@@ -16,21 +15,39 @@ namespace LabNet2021.TP7.MVC.Controllers
         // GET: Shippers
         public ActionResult Index()
         {
-            List<Shippers> shippers = shippersLogic.GetAll();
-
-            List<ShippersView> shippersView = shippers.Select(s => new ShippersView
+            try
             {
-                ID = s.ShipperID,
-                Company = s.CompanyName,
-                Phone = s.Phone
-            }).ToList();
+                List<Shippers> shippers = shippersLogic.GetAll();
 
-            return View(shippersView);
+                List<ShippersView> shippersView = shippers.Select(s => new ShippersView
+                {
+                    ID = s.ShipperID,
+                    Company = s.CompanyName,
+                    Phone = s.Phone
+                }).ToList();
+
+                return View(shippersView);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("~/Views/Error/Index.cshtml");
+                throw;
+            }
         }
 
         public ActionResult Insert()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("~/Views/Error/Index.cshtml");
+                throw;
+            }
         }
 
         [HttpPost]
@@ -53,20 +70,30 @@ namespace LabNet2021.TP7.MVC.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                ViewBag.Error = ex.Message;
+                return View("~/Views/Error/Index.cshtml");
                 throw;
             }
         }
 
         public ActionResult Update(int id, string company, string phone)
         {
-            ViewBag.ID = id;
-            ViewBag.Company = company;
-            ViewBag.Phone = phone;
+            try
+            {
+                ViewBag.ID = id;
+                ViewBag.Company = company;
+                ViewBag.Phone = phone;
 
-            return View("~/Views/Shippers/Insert.cshtml");
+                return View("~/Views/Shippers/Insert.cshtml");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("~/Views/Error/Index.cshtml");
+                throw;
+            }
         }
 
         [HttpPost]
@@ -90,18 +117,28 @@ namespace LabNet2021.TP7.MVC.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                ViewBag.Error = ex.Message;
+                return View("~/Views/Error/Index.cshtml");
                 throw;
             }
         }
 
         public ActionResult Delete(int id)
         {
-            shippersLogic.Delete(id);
+            try
+            {
+                shippersLogic.Delete(id);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("~/Views/Error/Index.cshtml");
+                throw;
+            }
         }
     }
 }
