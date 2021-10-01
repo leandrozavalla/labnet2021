@@ -12,7 +12,6 @@ namespace LabNet2021.TP7.MVC.Controllers
     {
         ShippersLogic shippersLogic = new ShippersLogic();
 
-        // GET: Shippers
         public ActionResult Index()
         {
             try
