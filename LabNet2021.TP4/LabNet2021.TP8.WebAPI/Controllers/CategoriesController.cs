@@ -8,19 +8,19 @@ using System.Web.Http.Cors;
 namespace LabNet2021.TP8.WebAPI.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-    public class ShippersController : ApiController
+    public class CategoriesController : ApiController
     {
-        ShippersLogic shippersLogic = new ShippersLogic();
+        CategoriesLogic categoriesLogic = new CategoriesLogic();
 
-        // GET: api/Shippers
+        // GET: api/Categories
         [HttpGet]
         public IHttpActionResult Get()
         {
             try
             {
-                var shippers = shippersLogic.GetAll();
+                var categories = categoriesLogic.GetAll();
 
-                return Ok(shippers);
+                return Ok(categories);
             }
             catch (Exception ex)
             {
@@ -29,19 +29,19 @@ namespace LabNet2021.TP8.WebAPI.Controllers
             }
         }
 
-        // POST: api/Shippers
+        // POST: api/Categories
         [HttpPost]
-        public IHttpActionResult Post([FromBody] ShippersView shippersView)
+        public IHttpActionResult Post([FromBody] CategoriesView categoriesView)
         {
             try
             {
-                Shippers shipperEntity = new Shippers
+                Categories categoryEntity = new Categories
                 {
-                    CompanyName = shippersView.Company,
-                    Phone = shippersView.Phone
+                    CategoryName = categoriesView.Category,
+                    Description = categoriesView.Description
                 };
 
-                shippersLogic.Add(shipperEntity);
+                categoriesLogic.Add(categoryEntity);
 
                 return Ok("¡Operación exitosa!");
             }
@@ -52,20 +52,20 @@ namespace LabNet2021.TP8.WebAPI.Controllers
             }
         }
 
-        // PUT: api/Shippers/5
+        // PUT: api/Categories/5
         [HttpPut]
-        public IHttpActionResult Put(int id, [FromBody] ShippersView shippersView)
+        public IHttpActionResult Put(int id, [FromBody] CategoriesView categoriesView)
         {
             try
             {
-                Shippers shipperEntity = new Shippers
+                Categories categoryEntity = new Categories
                 {
-                    ShipperID = id,
-                    CompanyName = shippersView.Company,
-                    Phone = shippersView.Phone
+                    CategoryID = id,
+                    CategoryName = categoriesView.Category,
+                    Description = categoriesView.Description
                 };
 
-                shippersLogic.Update(shipperEntity);
+                categoriesLogic.Update(categoryEntity);
 
                 return Ok("¡Operación exitosa!");
             }
@@ -76,13 +76,13 @@ namespace LabNet2021.TP8.WebAPI.Controllers
             }
         }
 
-        // DELETE: api/Shippers/5
+        // DELETE: api/Categories/5
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             try
             {
-                shippersLogic.Delete(id);
+                categoriesLogic.Delete(id);
 
                 return Ok("¡Operación exitosa!");
             }

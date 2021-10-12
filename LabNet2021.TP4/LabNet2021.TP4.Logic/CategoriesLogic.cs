@@ -1,4 +1,5 @@
 ﻿using LabNet2021.TP4.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,28 +9,56 @@ namespace LabNet2021.TP4.Logic
     {
         public void Add(Categories item)
         {
-            context.Categories.Add(item);
-            context.SaveChanges();
+            try
+            {
+                context.Categories.Add(item);
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Delete(int id)
         {
-            var categoryToDelete = context.Categories.Find(id);
-            context.Categories.Remove(categoryToDelete);
-            context.SaveChanges();
+            try
+            {
+                var categoryToDelete = context.Categories.Find(id);
+                context.Categories.Remove(categoryToDelete);
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<Categories> GetAll()
         {
-            return context.Categories.ToList();
+            try
+            {
+                return context.Categories.ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Update(Categories item)
         {
-            var categoryToUpdate = context.Categories.Find(item.CategoryID);
-            categoryToUpdate.CategoryName = item.CategoryName;
-            categoryToUpdate.Description = item.Description;
-            context.SaveChanges();
+            try
+            {
+                var categoryToUpdate = context.Categories.Find(item.CategoryID);
+                categoryToUpdate.CategoryName = item.CategoryName;
+                categoryToUpdate.Description = item.Description;
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
